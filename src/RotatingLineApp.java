@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Line2D;
+import java.awt.geom.Ellipse2D;
 
 public class RotatingLineApp {
     public static void main(String[] args) {
@@ -36,13 +36,17 @@ public class RotatingLineApp {
                 Color lineColor = Color.getHSBColor(angle / 360f, 1f, 1f);
                 g2d.setColor(lineColor);
 
-                // Повертаємо координати початку та кінця відрізка
+                // Повертаємо координати кінця відрізка
                 double rotatedEndX = startX + (endX - startX) * sinAngle;
                 double rotatedEndY = startY + (endY - startY) * sinAngle;
 
-                Line2D line = new Line2D.Double(startX, startY, rotatedEndX, rotatedEndY);
+                // Об'єкт Ellipse2D для відрізка
+                double circleSize = 40; // Розмір кола
+                double circleX = rotatedEndX - circleSize / 2;
+                double circleY = rotatedEndY - circleSize / 2;
+                Ellipse2D ellipse = new Ellipse2D.Double(circleX, circleY, circleSize, circleSize);
 
-                g2d.draw(line);
+                g2d.draw(ellipse);
             }
         };
 
